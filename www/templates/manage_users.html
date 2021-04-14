@@ -1,0 +1,49 @@
+{% extends '__base__.html' %}
+
+{% block title %}用户{% endblock title %}
+
+{% block beforehead %}
+<link rel="stylesheet" href="/static/css/manage-users.css">
+{% endblock beforehead %}
+
+{% block content %}
+<nav class="nav d-flex justify-content-center mb-4">
+  <a class="p-2" href="/manage/blogs/create">编写日志</a>
+  <a class="p-2" href="/manage/blogs">日志管理</a>
+  <a class="p-2" href="/manage/comments">评论管理</a>
+  <span class="p-2 text-muted">用户管理</span>
+</nav>
+
+<div class="table-responsive" id="vm">
+  <template v-if="users.length > 0">
+    <table class="table table-striped table-sm text-center">
+      <thead>
+        <tr>
+          <th>名字</th>
+          <th>电子邮箱</th>
+          <th>注册时间</th>
+        </tr>
+      </thead>
+      <tbody id="userList">
+        <tr v-for="user in users">
+          <td><span v-text="user.name"></span><template v-if="user.admin"><span class="text-admin ml-1">(管理员)</span></template></td>
+          <td><a v-bind:href="'mailto:' + user.email" v-text="user.email"></a></td>
+          <td><span v-text="user.create_time.toDateTime()"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <template v-if="page.has_next">
+    <nav class="text-center">
+      <button class="btn btn-outline-primary my-2" id="btnMore" onclick="loadUsers(++currentPage)">加载更多</button>
+    </nav>
+  </template>
+  <template v-if="users.length === 0">
+    <div class="text-center"><span>没有用户可供管理</span></div>
+  </template>
+</div>
+{% endblock content %}
+
+{% block beforebody %}
+<script src="/static/js/manage-users.js"></script>
+{% endblock beforebody %}

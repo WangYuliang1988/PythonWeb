@@ -1,0 +1,12 @@
+.blog-post {
+  margin-bottom: 4rem;
+}
+.blog-post-title {
+  margin-bottom: .50rem;
+  font-size: 1.50rem;
+}
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  color: #999;
+}

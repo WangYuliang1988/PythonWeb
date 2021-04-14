@@ -1,0 +1,50 @@
+{% extends '__base__.html' %}
+
+{% block title %}日志{% endblock title %}
+
+{% block beforehead %}
+<link rel="stylesheet" href="/static/css/manage-blogs.css">
+{% endblock beforehead %}
+
+{% block content %}
+<nav class="nav d-flex justify-content-center mb-4">
+  <a class="p-2" href="/manage/blogs/create">编写日志</a>
+  <span class="p-2 text-muted">日志管理</span>
+  <a class="p-2" href="/manage/comments">评论管理</a>
+  <a class="p-2" href="/manage/users">用户管理</a>
+</nav>
+
+<div class="table-responsive" id="vm">
+  <template v-if="blogs.length > 0">
+    <table class="table table-striped table-sm text-center">
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th>作者</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="blogList">
+        <tr v-for="blog in blogs">
+          <td><a v-bind:href="'/blog/' + blog.id" v-text="blog.name"></a></td>
+          <td><span v-text="blog.user_name"></span></td>
+          <td><button class="btn btn-sm btn-outline-primary mr-2" v-on:click="editBlog(blog)">编辑</button>
+            <button class="btn btn-sm btn-outline-secondary" v-on:click="deleteBlog(blog)">删除</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </template>
+  <template v-if="page.has_next">
+    <nav class="text-center">
+      <button class="btn btn-outline-primary my-2" id="btnMore" onclick="loadBlogs(++currentPage)">加载更多</button>
+    </nav>
+  </template>
+  <template>
+    <div class="text-center" v-if="blogs.length === 0"><span>没有日志可供管理</span></div>
+  </template>
+</div>
+{% endblock content %}
+
+{% block beforebody %}
+<script src="/static/js/manage-blogs.js"></script>
+{% endblock beforebody %}

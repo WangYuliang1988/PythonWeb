@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+一个Web App中往往存在很多页面，这些页面可能都拥有部分重复的内容，比如页面和页脚。针对了重复的HTML的复用问题，有的模板引擎是通过include，而jinjia2采用的是“继承”方式。
+
+“继承”模板的方式是通过编写一个“父模板”，在父模板中定义一些可替换的block。然后，编写多个“子模板”，每个子模板都可以只替换父模板定义的block。
+
+__base__.html就是一个父模板
+-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block meta %}<!-- 可覆盖的block，用于子页面定义一些meta -->{% endblock %}
+
+  <title>{% block title %} ? {% endblock %} - PythonWeb</title>
+
+  <link rel="stylesheet" href="/static/css/bootstrap-4.3.1/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  {% block beforehead %}<!-- 子页面可以在head标签关闭前插入CSS代码 -->{% endblock %}
+</head>
+
+<body>
+  <div class="base-container">
+    <header class="base-header py-3">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-6" id="titleArea">
+          <a class="base-header-title text-dark text-decoration-none" href="/">PythonWeb</a>
+        </div>
+        <div class="col-6 d-flex justify-content-end align-items-center" id="userArea">
+          {% if __user__ %}
+          <span class="text-muted">{{ __user__.name }}</span>
+          {% if __user__.admin %}
+          <a href="/manage/" class="btn btn-sm btn-outline-secondary ml-2">管理</a>
+          {% endif %}
+          <a href="/logout" class="btn btn-sm btn-outline-secondary ml-2">退出</a>
+          {% else %}
+          <a href="/login" class="btn btn-sm btn-outline-secondary">登录</a>
+          <a href="/register" class="btn btn-sm btn-outline-secondary ml-2">注册</a>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+
+    <main class="base-main" role="main">
+      {% block content %}<!-- 子页面的content -->{% endblock %}
+    </main>
+
+    <footer class="base-footer">
+      <p>Powered by <a href="https://github.com/WangYuliang1988" target="_blank">WangYuliang</a>. Copyright &copy; 2020.</p>
+      <p><a href="https://github.com/WangYuliang1988" target="_blank">WangYuliang</a>. All rights reserved.<a target="_blank" href="http://beian.miit.gov.cn/" class="ml-2">豫ICP备19016855号</a><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41019602002168" class="ml-2" ><img src="/static/images/gongan.png" class="mb-1">豫公网安备41019602002168号</a></p>
+    </footer>
+  </div>
+
+  <script src="/static/js/jquery-3.4.1/jquery.min.js"></script>
+  <script src="/static/js/popper-1.15.0/popper.min.js"></script>
+  <script src="/static/js/bootstrap-4.3.1/bootstrap.bundle.js"></script>
+  <script src="/static/js/vue-2.6.10/vue.min.js"></script>
+  <script src="/static/js/cryptojs-3.2.1/sha1.min.js"></script>
+  <script src="/static/js/base.js"></script>
+  {% block beforebody %}<!-- 子页面可以在body标签关闭前插入JavaScript代码 -->{% endblock %}
+</body>
+
+</html>

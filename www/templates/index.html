@@ -1,0 +1,55 @@
+{% extends '__base__.html' %}
+
+{% block title %}日志{% endblock title %}
+
+{% block beforehead %}
+<link rel="stylesheet" href="/static/css/index.css">
+{% endblock beforehead %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8" id="vm">
+      <template v-if="blogs.length > 0">
+        <div id="blogList">
+          <div class="blog-post" v-for="blog in blogs">
+            <h2 class="blog-post-title"><a v-bind:href="'/blog/' + blog.id" v-text="blog.name"></a></h2>
+            <p class="blog-post-meta" v-text="'发表于 ' + blog.create_time.toDateTime()"></p>
+            <p v-text="blog.summary"></p>
+            <p><a v-bind:href="'/blog/' + blog.id">继续阅读</a></p>
+          </div>
+        </div>
+      </template>
+      <template v-if="page.has_next">
+        <button class="btn btn-outline-primary" id="btnMore" onclick="loadBlogs(++currentPage)">查看更多</button>
+      </template>
+      <template v-if="blogs.length === 0">
+        <p>昔人已乘黄鹤去</p>
+        <p>此地空余黄鹤楼</p>
+        <p>黄鹤一去不复返</p>
+        <p>白云千载空悠悠</p>
+        <p>晴川历历汉阳树</p>
+        <p>芳草萋萋鹦鹉洲</p>
+        <p>日暮乡关何处是</p>
+        <p>烟波江上使人愁</p>
+      </template>
+    </div>
+    <aside class="col-md-4">
+      <div class="p-4 mb-3 bg-light rounded">
+        <h4>关于</h4>
+        <p class="mb-0">PythonWeb，一个用Python编写的网站，使用Bootstrap实现移动优先的响应式UI，使用Vue实现前端MVVM框架。</p>
+      </div>
+      <div class="p-4">
+        <h4>友链</h4>
+        <ol class="list-unstyled">
+          <li><a href="https://vuejs.org/" target="_blank">Vue</a></li>
+          <li><a href="https://www.python.org/" target="_blank">Python</a></li>
+          <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+        </ol>
+      </div>
+    </aside>
+</div>
+{% endblock content %}
+
+{% block beforebody %}
+<script src="/static/js/index.js"></script>
+{% endblock beforebody %}

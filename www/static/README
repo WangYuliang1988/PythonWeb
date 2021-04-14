@@ -1,0 +1,3 @@
+对于复杂的HTML前端页面来说，需要一套基础的CSS框架来完成页面布局和基本样式。
+
+从零开始写CSS不如直接从一个已有的功能完善的CSS框架开始，有很多CSS框架可供选择，本项目选择Bootstrap（https://getbootstrap.com/）。

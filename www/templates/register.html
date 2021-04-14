@@ -1,0 +1,45 @@
+{% extends '__base__.html' %}
+
+{% block title %}注册{% endblock %}
+
+{% block beforehead %}
+<link rel="stylesheet" href="/static/css/register.css">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <!-- 通过v-on:submit.prevent，Vue将表单提交事件关联至onSubmit()方法 -->
+  <form class="form-register needs-validation" id="vm" v-on:submit.prevent="onSubmit" novalidate>
+    <div class="mb-4 text-center">
+      <img src="/static/images/python.jpg" alt="" width="72" height="72">
+    </div>
+    <p class="server-feedback text-center" id="error"></p>
+    <div class="mb-3">
+      <label for="inputName" class="sr-only">用户名称</label>
+      <!-- 通过v-model，可以让Vue把Model和View关联起来，此处是将input的value和Model的name关联起来 -->
+      <input class="form-control" type="text" id="inputName" v-model="name" placeholder="请填写用户名称（至少2个字符）" minlength="2" maxlength="64" required>
+      <div class="invalid-feedback">请输入正确的用户名称</div>
+    </div>
+    <div class="mb-3">
+      <label for="inputEmail" class="sr-only">电子邮箱</label>
+      <input class="form-control" type="email" id="inputEmail" v-model="email" maxlength="128" placeholder="请填写电子邮箱" required>
+      <div class="invalid-feedback">请输入正确的电子邮箱</div>
+    </div>
+    <div class="mb-3">
+      <label for="inputPassword" class="sr-only">输入密码</label>
+      <input class="form-control" type="password" id="inputPassword" v-model="passwd" placeholder="请设置登录密码（至少6个字符）" maxlength="32" minlength="6" required>
+      <div class="invalid-feedback">请输入正确的登录密码</div>
+    </div>
+    <div class="mb-3">
+      <label for="reinputPassword" class="sr-only">再次输入密码</label>
+      <input class="form-control" type="password" id="reinputPassword" v-model="rePasswd" placeholder="请再次输入密码" maxlength="32" minlength="6" required>
+      <div class="invalid-feedback">请输入正确的登录密码</div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-primary btn-block mt-3">注册</button>
+  </form>
+</div>
+{% endblock content %}
+
+{% block beforebody %}
+<script src="/static/js/register.js"></script>
+{% endblock beforebody %}

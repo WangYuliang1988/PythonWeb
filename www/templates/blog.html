@@ -1,0 +1,63 @@
+{% extends '__base__.html' %}
+
+{% block title %}日志{% endblock title %}
+
+{% block beforehead %}
+<link rel="stylesheet" href="/static/css/blog.css">
+{% endblock beforehead %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8 mb-3" id="vm_blog">
+    <div class="single-widget box-shadow">
+      <h2 class="blog-title" v-text="blog.name"></h2>
+      <p class="blog-meta" v-text="'发表于 ' + blog.create_time.toDateTime()"></p>
+      <p v-html='blog.html_content'></p>
+    </div>
+
+    <div class="single-widget box-shadow mt-4">
+      <h4 class="comment-title">评论</h4>
+      <template v-if="comments.length > 0">
+        <div id="comment-list">
+          <div class="single-comment" v-for="comment in comments">
+            <div class="comment-image">
+              <img class="img-thumbnail rounded-circle" v-bind:src="comment.user_image" width="65" height="65">
+            </div>
+            <div class="comment-info">
+              <div class="text-muted mb-2"><span class="mr-2" v-text="comment.user_name"></span><span v-text="comment.create_time.toDateTime()"></span></div>
+              <p v-html="comment.html_content"></p>
+            </div>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <span class="text-muted">还没有人评论...</span>
+      </template>
+      {% if __user__ %}
+      <form class="needs-validation mt-4" id="form-comment" v-on:submit.prevent="onSubmit" novalidate>
+        <div class="mb-2">
+          <label for="inputComment" class="sr-only">评论内容</label>
+          <textarea class="form-control" id="inputComment" placeholder="说点什么吧" rows="6" required></textarea>
+          <div class="invalid-feedback">请输入评论内容</div>
+        </div>
+        <button type="submit" class="btn btn-md btn-primary mt-2 px-4">发表评论</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="single-widget box-shadow" id="vm_profile">
+      <div class="text-center">
+        <img class="img-thumbnail rounded-circle mb-1" v-bind:src="blog.user_image" width="120" height="120">
+        <h4><a href="https://github.com/WangYuliang1988" v-text="blog.user_name" target="_blank"></a></h4>
+        <p>Non-Professional Blogger</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block beforebody %}
+<script>var BLOG_ID = '{{ id }}';</script>
+<script src="/static/js/blog.js"></script>
+{% endblock beforebody %}

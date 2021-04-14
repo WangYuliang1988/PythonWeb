@@ -1,2 +1,2 @@
 # PythonWeb
-A web site written by python
+A web site written by Python.

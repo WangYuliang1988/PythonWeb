@@ -1,0 +1,16 @@
+.form-blog {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto; /* auto 属性用来分配剩余空间，可以使元素居中 */
+}
+.form-blog .btn {
+  width: 120px;
+}
+
+.server-feedback {
+  display: none;
+  width: 100%;
+  font-size: 80%;
+  color: #dc3545;
+}
