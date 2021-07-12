@@ -45,8 +45,8 @@ class Comment(Model):
 # Model对应的数据库表通过手动方式进行创建
 # 依次在MySQL命令行执行以下语句完成表的创建操作
 #
-# 创建用户，用户名为wangyuliang，密码为langzi_1206
-#   create user 'wangyuliang'@'localhost' identified by 'langzi_1206';
+# 创建用户
+#   create user 'mufc'@'localhost' identified by 'ferguson';
 # 
 # 创建数据库
 #   create database if not exists web;
@@ -55,7 +55,7 @@ class Comment(Model):
 #   use web;
 #
 # 给数据库用户赋权
-#   grant select, insert, update, delete on web.* to 'wangyuliang'@'localhost';
+#   grant select, insert, update, delete on web.* to 'mufc'@'localhost';
 #
 # 创建users表
 #   create table users (
