@@ -100,9 +100,12 @@ class Comment(Model):
 
 # 通过以下代码测试数据库、Model和ORM
 #
+# from config import configs
+#
 # import orm, asyncio
+#
 # async def check(loop):
-#     await orm.create_pool(loop, user=configs['db']['user'], password=configs['db']['password'], database=configs['db']['database'])
+#     await orm.create_pool(loop, host=configs['db']['host'], port=configs['db']['port'], user=configs['db']['user'], password=configs['db']['password'], database=configs['db']['database'])
 #     # # 测试保存
 #     u = User(name='ww', email='mail@cc.com', passwd='123456', image='no')
 #     print(await u.save())
