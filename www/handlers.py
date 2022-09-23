@@ -32,7 +32,7 @@ def get_page_index(page_str):
 
 # 将文本转换为HTML
 def text2html(text):
-    func = lambda s: '<p>%s</p>' % s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&rt;')
+    func = lambda s: '<p>%s</p>' % s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
     lines = map(func, filter(lambda s: s.strip() != '', text.split('\n')))
     return ''.join(lines)
 
