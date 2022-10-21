@@ -23,7 +23,7 @@ $(function () {
             var data = {
               name: this.name.trim(),
               email: this.email.trim(),
-              passwd: CryptoJS.SHA1(this.password).toString()
+              passwd: CryptoJS.SHA1(this.passwd).toString()
             }
             postJSON('/api/users', data, function (result) {
               if (result.error) {
