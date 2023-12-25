@@ -40,6 +40,8 @@ $(function () {
   } else {
     var blog = {
       name: '',
+      author: '',
+      dynasty: '',
       summary: '',
       content: ''
     };

@@ -217,17 +217,21 @@ async def api_blogs(*, page='1'):
     return dict(page=p, blogs=blogs)
 
 @post('/api/blogs')
-async def api_create_blog(request, *, name, summary, content):
+async def api_create_blog(request, *, name, author, dynasty, summary, content):
     check_admin(request)
 
     if not name or not name.strip():
         raise APIValueError('name', 'name cannot be empty.')
+    if not author or not author.strip():
+        raise APIValueError('author', 'author cannot be empty.')
+    if not dynasty or not dynasty.strip():
+        raise APIValueError('dynasty', 'dynasty cannot be empty.')
     if not summary or not summary.strip():
         raise APIValueError('summary', 'summary cannot be empty.')
     if not content or not content.strip():
         raise APIValueError('content', 'content cannot be empty.')
     
-    blog = Blog(user_id=request.__user__.id, user_name=request.__user__.name, user_image=request.__user__.image, name=name.strip(), summary=summary.strip(), content=content.strip())
+    blog = Blog(user_id=request.__user__.id, user_name=request.__user__.name, user_image=request.__user__.image, name=name.strip(), author = author.strip(), dynasty=dynasty.strip(), summary=summary.strip(), content=content.strip())
     return (await blog.save())
 
 @get('/api/blogs/{id}')
@@ -240,17 +244,23 @@ async def api_get_blog(*, id):
     return dict(blog=blog, comments=comments)
 
 @post('/api/blogs/{id}')
-async def api_update_blog(id, request, *, name, summary, content):
+async def api_update_blog(id, request, *, name, author, dynasty, summary, content):
     check_admin(request)
 
     blog = await Blog.find(id)
     if not name or not name.strip():
         raise APIValueError('name', 'name cannot be empty.')
+    if not author or not author.strip():
+        raise APIValueError('author', 'author cannot be empty.')
+    if not dynasty or not dynasty.strip():
+        raise APIValueError('dynasty', 'dynasty cannot be empty.')
     if not summary or not summary.strip():
         raise APIValueError('summary', 'summary cannot be empty.')
     if not content or not content.strip():
         raise APIValueError('content', 'content cannot be empty.')
     blog.name = name.strip()
+    blog.author = author.strip()
+    blog.dynasty = dynasty.strip()
     blog.summary = summary.strip()
     blog.content = content.strip()
     await blog.update()

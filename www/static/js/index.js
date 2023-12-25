@@ -30,7 +30,7 @@ function loadBlogs(pageIndex) {
         result.blogs.forEach(blog => {
           var html = '<div class="blog-post">' + 
             '<h2 class="blog-post-title"><a href="/blog/' + blog.id + '">' + blog.name + '</a></h2>' +
-            '<p class="blog-post-meta">发表于 '+ blog.create_time.toDateTime() + '</p>' +
+            '<p class="blog-post-meta">'+ blog.dynasty + ' · ' + blog.author + '</p>' +
             '<p>' + blog.summary +'</p>' +
             '<p><a href="/blog/' + blog.id + '">继续阅读</a></p>' +
             '</div>';

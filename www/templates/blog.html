@@ -11,7 +11,7 @@
   <div class="col-md-8 mb-3" id="vm_blog">
     <div class="single-widget box-shadow">
       <h2 class="blog-title" v-text="blog.name"></h2>
-      <p class="blog-meta" v-text="'发表于 ' + blog.create_time.toDateTime()"></p>
+      <p class="blog-meta" v-text="blog.dynasty + ' · ' + blog.author"></p>
       <p v-html='blog.html_content'></p>
     </div>
 
@@ -24,7 +24,8 @@
               <img class="img-thumbnail rounded-circle" v-bind:src="comment.user_image" width="65" height="65">
             </div>
             <div class="comment-info">
-              <div class="text-muted mb-2"><span class="mr-2" v-text="comment.user_name"></span><span v-text="comment.create_time.toDateTime()"></span></div>
+              <div class="text-muted mb-2"><span class="mr-2" v-text="comment.user_name"></span><span
+                  v-text="comment.create_time.toDateTime()"></span></div>
               <p v-html="comment.html_content"></p>
             </div>
           </div>

@@ -27,6 +27,8 @@ class Blog(Model):
     user_name = StringField(column_type='varchar(64)')
     user_image = StringField(column_type='varchar(512)')
     name = StringField(column_type='varchar(64)')
+    author = StringField(column_type='varchar(64)')
+    dynasty = StringField(column_type='varchar(16)')
     summary = StringField(column_type='varchar(256)')
     content = TextField()
     create_time = FloatField(default=time.time)
@@ -78,6 +80,8 @@ class Comment(Model):
 #       `user_name` varchar(64) not null,
 #       `user_image` varchar(512) not null,
 #       `name` varchar(64) not null,
+#       `author` varchar(64) not null,
+#       `dynasty` varchar(16) not null,
 #       `summary` varchar(256) not null,
 #       `content` mediumtext not null,
 #       `create_time` real not null,

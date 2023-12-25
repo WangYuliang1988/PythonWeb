@@ -27,7 +27,7 @@
       <tbody id="blogList">
         <tr v-for="blog in blogs">
           <td><a v-bind:href="'/blog/' + blog.id" v-text="blog.name"></a></td>
-          <td><span v-text="blog.user_name"></span></td>
+          <td><span v-text="blog.author"></span></td>
           <td>
             <button class="btn btn-sm btn-outline-primary ml-1 mr-1" v-on:click="editBlog(blog)">编辑</button>
             <button class="btn btn-sm btn-outline-secondary ml-1 mr-1" v-on:click="deleteBlog(blog)">删除</button>
