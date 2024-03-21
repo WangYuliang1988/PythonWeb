@@ -122,6 +122,9 @@ def rollback(c):
         # 将app.py设置为可执行
         conn.run('chmod a+x %s/www/app.py' % _REMOTE_BASE_DIR)
 
+        # 删除当前版本对应目录
+        conn.run('rm -rf %s' % current)
+
         # 重启Python服务和Nginx服务
         conn.run('supervisorctl stop pythonweb')
         conn.run('supervisorctl start pythonweb')
