@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Only H5</title>
+  <script>
+    let ua = navigator.userAgent.toLowerCase() || navigator.swuserAgent.toLowerCase();
+    let isMiniProgram = (ua.indexOf('cmcc') > -1 && ua.indexOf('miniprogram') > -1) || ua.indexOf('alipayide') > -1;
+    if (isMiniProgram) {
+      document.writeln('<script src="https://appx/web-view.min.js"' + '>' + '<' + '/' + 'script>');
+    }
+    window.onload = function() {
+      if(!isMiniProgram) {
+        document.body.innerHTML += '<p>If you see this tip, that means you are not in proper platform, you can access the full content by opening this page in China Mobile Mini Program.</p>'
+      } else {
+        let btns = document.getElementsByTagName('button');
+        for (const btn of btns) {
+          btn.style.display = 'block';
+        }
+        // 接收小程序发送的消息
+        my.onMessage = function(msg) {
+          my.alert({
+            title: 'Message sent by mini-program',
+            content: msg
+          });
+        }
+      }
+    }
+    function invokeMini(funcName, para) {
+      if (isMiniProgram) {
+        my[funcName](para);
+      } else {
+        alert('You must use ChinaMobile Mini Program to invoke this method.');
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      text-align: center;
+    }
+    button {
+      display: none;
+      margin: 8px auto;
+      padding: 12px 0;
+      width: 180px;
+      border-width: 0;
+      font-size: 18px;
+      color: white;
+      background: lightseagreen;
+    }
+  </style>
+</head>
+<body>
+  <h3>H5 For Mini Program</h3>
+  <button onclick="invokeMini('alert', {title: 'Alert', content: 'This is a Mini Program alert.'})">调用小程序警告框</button>
+  <button onclick="invokeMini('postMessage', {content: 'This is a message from web-view.'})">向小程序发消息</button>
+  <button onclick="invokeMini('navigateTo', {url: '../deeper/deeper?url=https\:\/\/www.yigelangzi.com'})">打开二级网页</button>
+</body>
+</html>
